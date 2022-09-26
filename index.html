@@ -8,8 +8,23 @@
   </head>
   <body>
     <div id="app">
-      Code link
-      <iframe src="data:text/html;base64,PGgxPk1pIHByaW1lciBwcm9ncmFtYTwvaDE+" frameborder="0"></iframe> <!-- iframe sirve para renderizar componentes html -->
+      Code Link
+      <div>
+        <label for="">HTML</label>
+        <textarea id="html" ></textarea>
+      </div>
+
+      <div>
+        <label for="">JS</label>
+        <textarea id="js" ></textarea>
+      </div>
+
+      <div>
+        <label for="">CSS</label>
+        <textarea id="css" ></textarea>
+      </div>
+
+      <iframe srcdoc="<h1>Hola mundo</h>" frameborder="0"></iframe> <!-- iframe sirve para renderizar componentes html -->
     </div>
     <script type="module" src="/main.js"></script>
   </body>
