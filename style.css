@@ -1,8 +1,18 @@
-:root {
-  font-family: 'Popins', sans-serif;
+body {
+  background-color: #2d323c;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.42857143;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 * {
@@ -13,38 +23,75 @@
   box-sizing: inherit;
 }
 
-body {
-  background: #303030;
-  color: #333;
-  font-size: 14px;
-  line-height: 1.42857143;
-  margin: 0;
-  padding: 0;
-
-  height: 100vh;
-  width: 100vw;
-}
-
-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  height: 100vh;
+#app {
+  font-family: Avenir, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -maz-osx-font-smoothing: grayscale;
 }
 
 iframe {
+  background: #fff;
+  border: 0;
   width: 100%;
   height: 100%;
-  border: 0;
-  background: #fff;
 }
 
 textarea {
   background: #333;
-  width: 100%;
-  border: 0;
+  box-shadow: 0 0 0 .1px rgba(255, 255, 255, .3);
+  background-size: 36px;
+  background-position: calc(100% - 16px) calc(100% - 16px);
+  background-repeat: no-repeat;
   color: #fff;
   font-family: monospace;
+  padding: 24px;
+  font-size: 18px;
+  resize: none;
+  width: 100%;
   height: 100%;
-  border: 2px solid #000;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+#html {
+  background-image: url('./assets/html5.svg');
+}
+
+#css {
+  background-image: url('./assets/css3.svg');
+}
+
+#js {
+  background-image: url('./assets/js.svg');
+}
+
+/* Estilos de grid para el layout */
+
+.grid {
+  display: grid;
+  grid-template-rows: 1fr 1px 1fr;
+  grid-template-columns: 1fr 1px 1fr;
+  height: 100vh;
+}
+
+.gutter-col {
+  grid-row: 1/-1;
+  cursor: col-resize;
+  background: #fff;
+}
+
+.gutter-col-1 {
+  grid-column: 2;
+}
+
+.gutter-row {
+  grid-column: 1/-1;
+  cursor: row-resize;
+  background: #fff;
+}
+
+.gutter-row-1 {
+  grid-row: 2;
 }

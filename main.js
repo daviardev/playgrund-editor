@@ -1,8 +1,21 @@
 import './style.css'
+import Split from 'split-grid'
+
+const $ = selector => document.querySelector(selector)
+
+Split({
+    columnGutters: [{
+        track: 1,
+        element: $(".gutter-col-1")
+    }],
+    rowGutters: [{
+        track: 1,
+        element: $(".gutter-row-1")
+    }]
+})
 
 // Selectores de id de los textarea
 
-const $ = selector => document.querySelector(selector)
 
 const $js = $("#js")
 const $css = $("#css")
