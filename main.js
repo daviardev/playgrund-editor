@@ -62,10 +62,10 @@ const createHtml = ({ html, css, js }) => {
       </head>
       <body>
         ${html}
+        <script>
+          ${js}
+        </script>
       </body>
-      <script>
-        ${js}
-      </script>
     </html>
   `  
 }
