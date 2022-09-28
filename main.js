@@ -1,5 +1,6 @@
 import './style.css'
 import Split from 'split-grid'
+import { encode, decode }from 'js-base64'
 
 const $ = selector => document.querySelector(selector)
 
@@ -27,9 +28,9 @@ function init () {
 
   const [decodeHtml, decodeCss, decodeJs] = pathname.slice(1).split('%7C')
 
-  const html = window.atob(decodeHtml)
-  const css = window.atob(decodeCss)
-  const js = window.atob(decodeJs)
+  const html = decode(decodeHtml)
+  const css = decode(decodeCss)
+  const js = decode(decodeJs)
 
   $html.value = html
   $css.value = css
@@ -44,7 +45,7 @@ function update () {
   const css = $css.value
   const js = $js.value
 
-  const hashedCode = `${window.btoa(html)}|${window.btoa(css)}|${window.btoa(js)}`
+  const hashedCode = `${encode(html)}|${encode(css)}|${encode(js)}`
   window.history.replaceState(null, null, `/${hashedCode}`)
 
   const htmlForPreview = createHtml({ html, css, js })
