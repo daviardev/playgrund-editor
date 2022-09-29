@@ -30,33 +30,32 @@ const $html = $('#html')
 const $css = $('#css')
 const $js = $('#js')
 
-const htmlEditor = monaco.editor.create($html, {
-  value: '',
-  language: 'html'
-})
+const { pathname } = window.location
 
+const [decodeHtml, decodeCss, decodeJs] = pathname.slice(1).split('%7C')
+
+const html = decode(decodeHtml)
+const css = decode(decodeCss)
+const js = decode(decodeJs)
+
+const htmlEditor = monaco.editor.create($html, {
+  value: html,
+  language: 'html',
+  fontSize: 18,
+  theme: 'vs-dark'
+})
 
 // $html.addEventListener('input', update)
 htmlEditor.onDidChangeModelContent(update)
 $css.addEventListener('input', update)
 $js.addEventListener('input', update)
 
-function init () {
-  const { pathname } = window.location
+// $html.value = html
+$css.value = css
+$js.value = js
 
-  const [decodeHtml, decodeCss, decodeJs] = pathname.slice(1).split('%7C')
-
-  const html = decode(decodeHtml)
-  const css = decode(decodeCss)
-  const js = decode(decodeJs)
-
-  // $html.value = html
-  $css.value = css
-  $js.value = js
-
-  const htmlForPreview = createHtml({ html, css, js })
-  $('iframe').setAttribute('srcdoc', htmlForPreview)
-}
+const htmlForPreview = createHtml({ html, css, js })
+$('iframe').setAttribute('srcdoc', htmlForPreview)
 
 function update () {
   const html = htmlEditor.getValue()
@@ -70,7 +69,7 @@ function update () {
   $('iframe').setAttribute('srcdoc', htmlForPreview)
 }
 
-const createHtml = ({ html, css, js }) => {
+function createHtml ({ html, css, js }) {
   return `
     <!DOCTYPE html>
     <html lang='es'>
@@ -88,5 +87,3 @@ const createHtml = ({ html, css, js }) => {
     </html>
   `  
 }
-
-init()
