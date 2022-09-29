@@ -1,6 +1,17 @@
 import './style.css'
 import Split from 'split-grid'
 import { encode, decode }from 'js-base64'
+import * as monaco from 'monaco-editor'
+import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
+import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
+
+self.MonacoEnvironment = {
+  getWorker (_, label) {
+    if (label === 'html') {
+      return new HtmlWorker()
+    }
+  }
+}
 
 const $ = selector => document.querySelector(selector)
 
@@ -19,7 +30,14 @@ const $html = $('#html')
 const $css = $('#css')
 const $js = $('#js')
 
-$html.addEventListener('input', update)
+const htmlEditor = monaco.editor.create($html, {
+  value: '',
+  language: 'html'
+})
+
+
+// $html.addEventListener('input', update)
+htmlEditor.onDidChangeModelContent(update)
 $css.addEventListener('input', update)
 $js.addEventListener('input', update)
 
@@ -32,7 +50,7 @@ function init () {
   const css = decode(decodeCss)
   const js = decode(decodeJs)
 
-  $html.value = html
+  // $html.value = html
   $css.value = css
   $js.value = js
 
@@ -41,7 +59,7 @@ function init () {
 }
 
 function update () {
-  const html = $html.value
+  const html = htmlEditor.getValue()
   const css = $css.value
   const js = $js.value
 
