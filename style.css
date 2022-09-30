@@ -87,15 +87,14 @@ textarea:focus {
 
 .grid {
   display: grid;
-  grid-template-rows: 1fr 1px 1fr;
-  grid-template-columns: 1fr 1px 1fr;
+  grid-template-columns: 49.8% 0.4% 49.8%;
+  grid-template-rows: 1fr 10px 1fr;
   height: 100vh;
 }
 
 .gutter-col {
   grid-row: 1/-1;
   cursor: col-resize;
-  background: #fff;
 }
 
 .gutter-col-1 {
@@ -105,13 +104,11 @@ textarea:focus {
 .gutter-row {
   grid-column: 1/-1;
   cursor: row-resize;
-  background: #fff;
 }
 
 .gutter-row-1 {
   grid-row: 2;
 }
-
 /* monaco-editor styles */
 
 .monaco-editor {

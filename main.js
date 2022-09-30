@@ -8,15 +8,9 @@ import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 
 self.MonacoEnvironment = {
   getWorker (_, label) {
-    if (label === 'html') {
-      return new HtmlWorker()
-    }
-    if (label === 'javascript') {
-      return new JsWorker()
-    }
-    if (label === 'css') {
-      return new CssWorker()
-    }
+    if (label === 'html') return new HtmlWorker()
+    if (label === 'javascript') return new JsWorker()
+    if (label === 'css') return new CssWorker()
   }
 }
 
@@ -25,11 +19,11 @@ const $ = selector => document.querySelector(selector)
 Split({
   columnGutters: [{
       track: 1,
-      element: $('.gutter-col-1')
+      element: $('.gutter-col-1'),
   }],
   rowGutters: [{
       track: 1,
-      element: $('.gutter-row-1')
+      element: $('.gutter-row-1'),
   }]
 })
 
