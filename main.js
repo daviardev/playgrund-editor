@@ -52,9 +52,23 @@ const htmlEditor = monaco.editor.create($html, {
   theme: 'vs-dark'
 })
 
+const jsEditor = monaco.editor.create($js, {
+  value: js,
+  language: 'javascript',
+  fontSize: 18,
+  theme: 'vs-dark'
+})
+
+const cssEditor = monaco.editor.create($css, {
+  value: css,
+  language: 'css',
+  fontSize: 18,
+  theme: 'vs-dark'
+})
+
 htmlEditor.onDidChangeModelContent(update)
-$css.addEventListener('input', update)
-$js.addEventListener('input', update)
+jsEditor.onDidChangeModelContent(update)
+cssEditor.onDidChangeModelContent(update)
 
 // $html.value = html
 $css.value = css
@@ -65,8 +79,8 @@ $('iframe').setAttribute('srcdoc', htmlForPreview)
 
 function update () {
   const html = htmlEditor.getValue()
-  const css = $css.value
-  const js = $js.value
+  const js = jsEditor.getValue()
+  const css = cssEditor.getValue()
 
   const hashedCode = `${encode(html)}|${encode(css)}|${encode(js)}`
   window.history.replaceState(null, null, `/${hashedCode}`)
