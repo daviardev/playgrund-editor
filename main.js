@@ -41,40 +41,37 @@ const { pathname } = window.location
 
 const [decodeHtml, decodeCss, decodeJs] = pathname.slice(1).split('%7C')
 
-const html = decode(decodeHtml)
-const css = decode(decodeCss)
-const js = decode(decodeJs)
+const html = decodeHtml ? decode(decodeHtml) : ''
+const css = decodeCss ? decode(decodeCss) : ''
+const js = decodeJs ? decode(decodeJs) : ''
+
+const COMMON_EDITOR_OPTIONS = {
+  automaticLayout: true,
+  fontSize: 18,
+  theme: 'vs-dark'
+}
 
 const htmlEditor = monaco.editor.create($html, {
   value: html,
   language: 'html',
-  fontSize: 18,
-  theme: 'vs-dark'
+  ...COMMON_EDITOR_OPTIONS
 })
 
 const jsEditor = monaco.editor.create($js, {
   value: js,
   language: 'javascript',
-  fontSize: 18,
-  theme: 'vs-dark'
+  ...COMMON_EDITOR_OPTIONS
 })
 
 const cssEditor = monaco.editor.create($css, {
   value: css,
   language: 'css',
-  fontSize: 18,
-  theme: 'vs-dark'
+  ...COMMON_EDITOR_OPTIONS
 })
 
-
-// $html.addEventListener('input', update)
 htmlEditor.onDidChangeModelContent(update)
 cssEditor.onDidChangeModelContent(update)
 jsEditor.onDidChangeModelContent(update)
-
-// $html.value = html
-$css.value = css
-$js.value = js
 
 const htmlForPreview = createHtml({ html, css, js })
 $('iframe').setAttribute('srcdoc', htmlForPreview)
