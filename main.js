@@ -3,12 +3,19 @@ import Split from 'split-grid'
 import { encode, decode }from 'js-base64'
 import * as monaco from 'monaco-editor'
 import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
+import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 
 self.MonacoEnvironment = {
   getWorker (_, label) {
     if (label === 'html') {
       return new HtmlWorker()
+    }
+    if (label === 'javascript') {
+      return new JsWorker()
+    }
+    if (label === 'css') {
+      return new CssWorker()
     }
   }
 }
@@ -45,7 +52,6 @@ const htmlEditor = monaco.editor.create($html, {
   theme: 'vs-dark'
 })
 
-// $html.addEventListener('input', update)
 htmlEditor.onDidChangeModelContent(update)
 $css.addEventListener('input', update)
 $js.addEventListener('input', update)

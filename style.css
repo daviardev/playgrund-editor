@@ -75,11 +75,11 @@ textarea:focus {
   background-image: url('./assets/html5.svg');
 }
 
-#css {
+#css::after {
   background-image: url('./assets/css3.svg');
 }
 
-#js {
+#js::after {
   background-image: url('./assets/js.svg');
 }
 
