@@ -1,12 +1,14 @@
 import './style.css'
-import Split from 'split-grid'
-import { encode, decode }from 'js-base64'
+import { encode, decode } from 'js-base64'
 import * as monaco from 'monaco-editor'
+import Split from 'split-grid'
+import { emmetHTML } from 'emmet-monaco-es'
+
 import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 
-self.MonacoEnvironment = {
+window.MonacoEnvironment = {
   getWorker (_, label) {
     if (label === 'html') return new HtmlWorker()
     if (label === 'javascript') return new JsWorker()
@@ -15,17 +17,6 @@ self.MonacoEnvironment = {
 }
 
 const $ = selector => document.querySelector(selector)
-
-Split({
-  columnGutters: [{
-      track: 1,
-      element: $('.gutter-col-1'),
-  }],
-  rowGutters: [{
-      track: 1,
-      element: $('.gutter-row-1'),
-  }]
-})
 
 const $html = $('#html')
 const $css = $('#css')
@@ -42,7 +33,18 @@ const js = decodeJs ? decode(decodeJs) : ''
 const COMMON_EDITOR_OPTIONS = {
   automaticLayout: true,
   fontSize: 18,
-  theme: 'vs-dark'
+  fontLigatures: true,
+  fontFamily: 'Fira Code',
+  theme: 'vs-dark',
+  scrollBeyondLastLine: false,
+  roundedSelection: false,
+  padding: {
+    top: 16
+  },
+  lineNumbers: false,
+  minimap: {
+    enabled: false
+  }
 }
 
 const htmlEditor = monaco.editor.create($html, {
@@ -61,6 +63,17 @@ const cssEditor = monaco.editor.create($css, {
   value: css,
   language: 'css',
   ...COMMON_EDITOR_OPTIONS
+})
+
+Split({
+  columnGutters: [{
+    track: 1,
+    element: document.querySelector('.vertical-gutter')
+  }],
+  rowGutters: [{
+    track: 1,
+    element: document.querySelector('.horizontal-gutter')
+  }]
 })
 
 htmlEditor.onDidChangeModelContent(update)
@@ -82,6 +95,7 @@ function update () {
   $('iframe').setAttribute('srcdoc', htmlForPreview)
 }
 
+// internal expand API,
 function createHtml ({ html, css, js }) {
   return `
     <!DOCTYPE html>
@@ -93,10 +107,10 @@ function createHtml ({ html, css, js }) {
       </head>
       <body>
         ${html}
-        <script>
+        <script type='module'>
           ${js}
         </script>
       </body>
     </html>
-  `  
+  `
 }
