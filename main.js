@@ -53,6 +53,8 @@ const htmlEditor = monaco.editor.create($html, {
   ...COMMON_EDITOR_OPTIONS
 })
 
+emmetHTML(monaco)
+
 const jsEditor = monaco.editor.create($js, {
   value: js,
   language: 'javascript',
