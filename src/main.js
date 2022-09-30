@@ -1,12 +1,13 @@
-import './style.css'
+import '../style.css'
 import { encode, decode } from 'js-base64'
-import * as monaco from 'monaco-editor'
 import Split from 'split-grid'
-import { emmetHTML } from 'emmet-monaco-es'
 
 import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
+
+import debounce from './debounce.js'
+import { createEditor } from './editor.js'
 
 window.MonacoEnvironment = {
   getWorker (_, label) {
@@ -30,42 +31,9 @@ const html = decodeHtml ? decode(decodeHtml) : ''
 const css = decodeCss ? decode(decodeCss) : ''
 const js = decodeJs ? decode(decodeJs) : ''
 
-const COMMON_EDITOR_OPTIONS = {
-  automaticLayout: true,
-  fontSize: 18,
-  fontLigatures: true,
-  fontFamily: 'Fira Code',
-  theme: 'vs-dark',
-  scrollBeyondLastLine: false,
-  roundedSelection: false,
-  padding: {
-    top: 16
-  },
-  lineNumbers: false,
-  minimap: {
-    enabled: false
-  }
-}
-
-const htmlEditor = monaco.editor.create($html, {
-  value: html,
-  language: 'html',
-  ...COMMON_EDITOR_OPTIONS
-})
-
-emmetHTML(monaco)
-
-const jsEditor = monaco.editor.create($js, {
-  value: js,
-  language: 'javascript',
-  ...COMMON_EDITOR_OPTIONS
-})
-
-const cssEditor = monaco.editor.create($css, {
-  value: css,
-  language: 'css',
-  ...COMMON_EDITOR_OPTIONS
-})
+const htmlEditor = createEditor({ domElement: $html, language: 'html', value: html })
+const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
+const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
 
 Split({
   columnGutters: [{
@@ -78,9 +46,12 @@ Split({
   }]
 })
 
-htmlEditor.onDidChangeModelContent(update)
-cssEditor.onDidChangeModelContent(update)
-jsEditor.onDidChangeModelContent(update)
+const MS_UPDATE_DEBOUCED_TIME = 200
+const debounceUpdate = debounce(update, MS_UPDATE_DEBOUCED_TIME)
+
+htmlEditor.onDidChangeModelContent(debounceUpdate)
+cssEditor.onDidChangeModelContent(debounceUpdate)
+jsEditor.onDidChangeModelContent(debounceUpdate)
 
 const htmlForPreview = createHtml({ html, css, js })
 $('iframe').setAttribute('srcdoc', htmlForPreview)
