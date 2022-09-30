@@ -8,6 +8,7 @@ const COMMON_EDITOR_OPTIONS = {
   fontFamily: 'Fira Code',
   theme: 'vs-dark',
   scrollBeyondLastLine: false,
+  fixedOverflowWidgets: true,
   roundedSelection: false,
   padding: {
     top: 16
