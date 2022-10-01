@@ -2,20 +2,9 @@ import '../style.css'
 import { encode, decode } from 'js-base64'
 import Split from 'split-grid'
 
-import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
-import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
-import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
-
-import debounce from './debounce.js'
+import debounce from './utils/debounce.js'
 import { createEditor } from './editor.js'
 
-window.MonacoEnvironment = {
-  getWorker (_, label) {
-    if (label === 'html') return new HtmlWorker()
-    if (label === 'javascript') return new JsWorker()
-    if (label === 'css') return new CssWorker()
-  }
-}
 
 const $ = selector => document.querySelector(selector)
 
@@ -38,11 +27,11 @@ const cssEditor = createEditor({ domElement: $css, language: 'css', value: css }
 Split({
   columnGutters: [{
     track: 1,
-    element: document.querySelector('.vertical-gutter')
+    element: $('.vertical-gutter')
   }],
   rowGutters: [{
     track: 1,
-    element: document.querySelector('.horizontal-gutter')
+    element: $('.horizontal-gutter')
   }]
 })
 
