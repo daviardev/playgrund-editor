@@ -8,7 +8,8 @@ const appInitialState = getLocalStorage('appInitialState') || {
     fontSize: 18,
     lineNumbers: 'off',
     minimap: false,
-    theme: 'vs-dark'
+    theme: 'vs-dark',
+    wordWrap: 'on'
 }
 
 const useStore = create(set => ({
