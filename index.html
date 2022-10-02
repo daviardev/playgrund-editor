@@ -39,7 +39,7 @@
             </strong>
             Controls the display of line numbers.
             <div class="select">
-              <select>
+              <select data-for='lineNumbers'>
                 <option value="on">on</option>
                 <option value="off">off</option>
                 <option value="relative">relative</option>
@@ -55,7 +55,7 @@
             </strong>
             Controls how lines should wrap.
             <div class="select">
-              <select>
+              <select data-for='wordWrap'>
                 <option value="off">off</option>
                 <option value="on">on</option>
                 <option value="wordWrapColumn">wordWrapColumn</option>
@@ -71,7 +71,7 @@
             </strong>
             Specifies the color theme used in the workbench.
             <div class="select">
-              <select>
+              <select data-for='theme'>
                 <option value="vs-dark">Dark</option>
                 <option value="vs">Light</option>
                 <option value="high-contrast">High Contrast Dark</option>
@@ -85,7 +85,7 @@
               Font Size
             </strong>
             Controls the font size in pixels.
-            <input class="input" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" wrap="off" tabindex="-1" value="16">
+            <input data-for="fontSize" class="input" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" wrap="off" tabindex="-1" value="16">
           </div>
 
           <div class="settings-item">
@@ -95,7 +95,7 @@
             </strong>
             <div>
               <label class='checkbox'>
-                <input type='checkbox' />
+                <input data-for="minimap" type='checkbox' />
                 <span>Controls whether the minimap is shown.</span>
               </label>
             </div>
