@@ -1,12 +1,11 @@
 import '../style.css'
+import './utils/aside.js'
 import { encode, decode } from 'js-base64'
-import Split from 'split-grid'
-
+import { $ } from './utils/dom.js'
 import debounce from './utils/debounce.js'
+import './grid.js'
 import { createEditor } from './editor.js'
-
-
-const $ = selector => document.querySelector(selector)
+import { initEditorHoykeys } from './utils/editor-hotkeys.js'
 
 const $html = $('#html')
 const $css = $('#css')
@@ -24,23 +23,15 @@ const htmlEditor = createEditor({ domElement: $html, language: 'html', value: ht
 const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
 const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
 
-Split({
-  columnGutters: [{
-    track: 1,
-    element: $('.vertical-gutter')
-  }],
-  rowGutters: [{
-    track: 1,
-    element: $('.horizontal-gutter')
-  }]
-})
-
 const MS_UPDATE_DEBOUCED_TIME = 200
 const debounceUpdate = debounce(update, MS_UPDATE_DEBOUCED_TIME)
 
+htmlEditor.focus()
 htmlEditor.onDidChangeModelContent(debounceUpdate)
 cssEditor.onDidChangeModelContent(debounceUpdate)
 jsEditor.onDidChangeModelContent(debounceUpdate)
+
+initEditorHoykeys({ htmlEditor, cssEditor, jsEditor })
 
 const htmlForPreview = createHtml({ html, css, js })
 $('iframe').setAttribute('srcdoc', htmlForPreview)
@@ -73,6 +64,5 @@ function createHtml ({ html, css, js }) {
           ${js}
         </script>
       </body>
-    </html>
-  `
+    </html>`
 }
