@@ -1,15 +1,21 @@
 import '../style.css'
 import './utils/aside.js'
-import { encode, decode } from 'js-base64'
-import { $ } from './utils/dom.js'
-import debounce from './utils/debounce.js'
 import './grid.js'
+
+import { $ } from './utils/dom.js'
+import { events } from './events'
+import { getState } from './state.js'
 import { createEditor } from './editor.js'
+import { encode, decode } from 'js-base64'
 import { initEditorHoykeys } from './utils/editor-hotkeys.js'
 
-const $html = $('#html')
-const $css = $('#css')
+console.log(getState())
+
+import debounce from './utils/debounce.js'
+
 const $js = $('#js')
+const $css = $('#css')
+const $html = $('#html')
 
 const { pathname } = window.location
 
@@ -22,6 +28,10 @@ const js = decodeJs ? decode(decodeJs) : ''
 const htmlEditor = createEditor({ domElement: $html, language: 'html', value: html })
 const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
 const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
+
+events.on('settings:change', e => {
+  
+})
 
 const MS_UPDATE_DEBOUCED_TIME = 200
 const debounceUpdate = debounce(update, MS_UPDATE_DEBOUCED_TIME)
