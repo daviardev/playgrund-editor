@@ -6,7 +6,7 @@ const setLocalStorage = (key, value) =>
 
 const appInitialState = getLocalStorage('appInitialState') || {
     fontSize: 18,
-    lineNumbers: 'off',
+    lineNumbers: 'on',
     minimap: false,
     theme: 'vs-dark',
     wordWrap: 'on'
@@ -14,15 +14,13 @@ const appInitialState = getLocalStorage('appInitialState') || {
 
 const useStore = create(set => ({
     ...appInitialState,
-    updateSettings: ({ setting, newValue }) => {
+    updateSettings: ({ key, value }) => {
         set(state => {
-            const { [setting]: removeOldSettings, ...restOfState } = state
-            const newState = {
-                ...restOfState,
-                [setting]: newValue
-            }
-            setLocalStorage('appInitialState', newState)
-            return newState
+            setLocalStorage('appInitialState', {
+                ...state,
+                [key]: value
+            })
+            return { [key]: value }
         })
     }
 }))
