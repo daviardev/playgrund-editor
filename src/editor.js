@@ -1,25 +1,36 @@
 import * as monaco from 'monaco-editor'
+
+import { getState } from './state.js'
 import { emmetHTML } from 'emmet-monaco-es'
 
 import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 
+const {
+  fontSize,
+  lineNumbers,
+  minimap,
+  theme,
+  wordWrap
+} = getState()
+
 const COMMON_EDITOR_OPTIONS = {
+  fontSize,
+  lineNumbers,
+  minimap: {
+    enabled: minimap
+  },
+  theme,
+  wordWrap,
   automaticLayout: true,
-  fontSize: 18,
   fontLigatures: true,
   fontFamily: 'Fira Code',
-  theme: 'vs-dark',
   scrollBeyondLastLine: false,
   fixedOverflowWidgets: true,
   roundedSelection: false,
   padding: {
     top: 16
-  },
-  lineNumbers: 'off',
-  minimap: {
-    enabled: false
   }
 }
 
