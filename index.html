@@ -4,7 +4,7 @@
     <meta charset='UTF-8' />
     <link rel='icon' type='image/svg+xml' href='./assets/favicon.png' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>Code | HTML, CSS, JS Live Editor Playground</title>
+    <title>Code | HTML, CSS, JS Editor Playground</title>
   </head>
   <body>
     <div id='app'>
@@ -35,15 +35,15 @@
           <div class="settings-item">
             <strong>
               <span class="settings-type">Editor:</span>
-              Line Numbers
+              Números de línea
             </strong>
-            Controls the display of line numbers.
+            Controla la visualización de los números de línea.
             <div class="select">
               <select data-for='lineNumbers'>
-                <option value="on">on</option>
-                <option value="off">off</option>
-                <option value="relative">relative</option>
-                <option value="interval">interval</option>
+                <option value="on">habilitado</option>
+                <option value="off">deshabilitado</option>
+                <option value="relative">relativo</option>
+                <option value="interval">intervalo</option>
               </select>
             </div>
           </div>
@@ -51,30 +51,30 @@
           <div class="settings-item">
             <strong>
               <span class="settings-type">Editor:</span>
-              Word Wrap
+              Envoltura de palabras
             </strong>
-            Controls how lines should wrap.
+            Controla cómo deben envolverse las líneas.
             <div class="select">
               <select data-for='wordWrap'>
-                <option value="off">off</option>
-                <option value="on">on</option>
-                <option value="wordWrapColumn">wordWrapColumn</option>
-                <option value="bounded">bounded</option>
+                <option value="on">habilitado</option>
+                <option value="off">deshabilitado</option>
+                <option value="wordWrapColumn">columna de envoltura de palabra</option>
+                <option value="bounded">limitado</option>
               </select>
             </div>
           </div>
 
           <div class="settings-item">
             <strong>
-              <span class="settings-type">Workbench:</span>
-              Color theme
+              <span class="settings-type">Banco de trabajo:</span>
+              Tema del editor
             </strong>
-            Specifies the color theme used in the workbench.
+            Especifica el tema del espacio de trabajo.
             <div class="select">
               <select data-for='theme'>
-                <option value="vs-dark">Dark</option>
-                <option value="vs">Light</option>
-                <option value="high-contrast">High Contrast Dark</option>
+                <option value="vs-dark">Oscuro</option>
+                <option value="vs">Claro</option>
+                <option value="high-contrast">Alto contraste oscuro</option>
               </select>
             </div>
           </div>
@@ -82,21 +82,21 @@
           <div class="settings-item">
             <strong>
               <span class="settings-type">Editor:</span>
-              Font Size
+              Tamaño de fuente
             </strong>
-            Controls the font size in pixels.
+            Controla el tamaño de la fuente por pixeles
             <input data-for="fontSize" class="input" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" wrap="off" tabindex="-1" value="16">
           </div>
 
           <div class="settings-item">
             <strong>
-              <span class="settings-type">Editor › Minimap:</span>
-              Enabled
+              <span class="settings-type">Editor › Minimapa:</span>
+              Habilitado
             </strong>
             <div>
               <label class='checkbox'>
                 <input data-for="minimap" type='checkbox' />
-                <span>Controls whether the minimap is shown.</span>
+                <span>Controla sí se muestra el minimapa.</span>
               </label>
             </div>
           </div>
