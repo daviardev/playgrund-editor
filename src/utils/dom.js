@@ -1,7 +1,2 @@
-export const $ = (selector, context = document) => {
-    context.querySelector(selector)
-}
-
-export const $$ = (selector, context = document) => {
-    context.querySelectorAll(selector)
-}
+export const $$ = selector => document.querySelectorAll(selector)
+export const $ = selector => document.querySelector(selector)
