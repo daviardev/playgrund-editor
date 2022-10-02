@@ -1,15 +1,13 @@
-import '../style.css'
-import './utils/aside.js'
 import './grid.js'
+import '../style.css'
+import './settings.js'
+import './utils/aside.js'
 
 import { $ } from './utils/dom.js'
-import { events } from './events'
-import { getState } from './state.js'
+import { subscribe } from './state.js'
 import { createEditor } from './editor.js'
 import { encode, decode } from 'js-base64'
 import { initEditorHoykeys } from './utils/editor-hotkeys.js'
-
-console.log(getState())
 
 import debounce from './utils/debounce.js'
 
@@ -29,8 +27,22 @@ const htmlEditor = createEditor({ domElement: $html, language: 'html', value: ht
 const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
 const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
 
-events.on('settings:change', e => {
-  
+subscribe(state => {
+  const editors = [htmlEditor, jsEditor, cssEditor]
+  editors.forEach(editor => {
+    const { minimap, ...restOfOptions } = state
+
+    const newOptions = {
+      ...restOfOptions,
+      minimap: {
+        enabled: minimap
+      }
+    }
+    editor.updateOptions({
+      ...editor.getRawOptions(),
+      ...newOptions
+    })
+  })
 })
 
 const MS_UPDATE_DEBOUCED_TIME = 200
