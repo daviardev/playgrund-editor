@@ -1,8 +1,8 @@
 import debounce from './utils/debounce.js'
 import { $ } from './utils/dom.js'
 
-const API_URL = 'https://api.skypack.dev/v1'
-const CDN_URL = 'https://cdn.skypack.dev'
+const apiUrl = 'https://api.skypack.dev/v1'
+const cdnUrl = 'https://cdn.skypack.dev'
 
 const $searchResults = $('#skypack .search-results')
 const $searchResultsList = $searchResults.querySelector('ul')
@@ -46,13 +46,11 @@ async function handleSearch () {
   }
 
   $searchResultsMessage.innerHTML = `${results.length} resultados de "${searchTerm}"`
-
   $searchResults.classList.remove('hidden')
 }
 
 async function fetchPackages (packageName) {
-  // eslint-disable-next-line no-undef
-  const response = await fetch(`${API_URL}/search?q=${packageName}&p=1`)
+  const response = await fetch(`${apiUrl}/search?q=${packageName}&p=1`)
   const data = await response.json()
   return data.results.map((result) => {
     return {
@@ -63,9 +61,5 @@ async function fetchPackages (packageName) {
 }
 
 function handlePackageSelected (packageName) {
-  $('[data-to="skypack"]').classList.remove('is-active')
-  $('#skypack').setAttribute('hidden', '')
-  $('#editor').removeAttribute('hidden')
-  $('[data-to="editor"]').classList.add('is-active')
-  window.postMessage({ package: packageName, url: `${CDN_URL}/${packageName}` })
+  window.postMessage({ package: packageName, url: `${cdnUrl}/${packageName}` })
 }
