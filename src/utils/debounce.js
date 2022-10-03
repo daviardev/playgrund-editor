@@ -1,4 +1,4 @@
- export default function debounce (func, msWait) {
+export default function debounce (func, msWait) {
   let timeout
   return function (...args) {
     const context = this
