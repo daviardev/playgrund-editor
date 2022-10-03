@@ -1,16 +1,14 @@
 @import url('./src/css/fonts.css');
 
 :root {
-  --bgc-input: #292d34;
+  --bgc-input: #2f363d;
   --bdc-input: rgb(27, 31, 35);
   --c-input: rgb(225, 228, 232);
 }
-
 body {
-  background: var(--bgc-input);
+  background-color: #2d323c;
   color: #333;
-  font-family: ''Helvetica Neue', Helvetica, Arial, sans-serif';
-  font-size: 14px;
+  font-family: 'Fira Code';
   font-size: 16px;
   line-height: 1.42857143;
   margin: 0;
@@ -25,7 +23,6 @@ body {
 *::before, *::after {
   box-sizing: inherit;
 }
-
 #app {
   display: grid;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -33,6 +30,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   grid-template-columns: 72px 1fr;
 }
+
+a {
+  color: #41a0ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 iframe {
   background: #fff;
   border: 0;
@@ -71,15 +78,15 @@ iframe {
 .vertical-gutter {
   cursor: col-resize;
   grid-area: 1 / 2 / 4 / 2;
-  background: var(--bgc-input);
+  background: #2d323c;
 }
 .horizontal-gutter {
   cursor: row-resize;
   grid-area: 2 / 1 / 2 / 4;
-  background: var(--bgc-input);
+  background: #2d323c;
 }
 aside {
-  background: var(--bgc-input);
+  background: #2d323c;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -88,19 +95,16 @@ aside button {
   background: transparent;
   border: 0;
   border-left: 3px solid transparent;
-  margin-left: -3px;
   cursor: pointer;
   width: 100%;
   opacity: .5;
   transition: opacity .1s ease;
   padding: 16px 0;
 }
-
 aside button.is-active {
   opacity: 1;
   border-left: 3px solid #c5c5c5;
 }
-
 aside button:hover {
   opacity: 1;
 }
@@ -111,20 +115,19 @@ aside svg {
 aside header,
 aside footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-
-#settings {
+#settings, #skypack {
   height: 100vh;
 }
 
 [hidden] {
   display: none !important;
 }
-
 select {
-  background: var(--bgc-input);
+  background-color: var(--bgc-input);
   color: var(--c-input);
   border: 1px solid var(--bdc-input);
   height: 26px;
@@ -133,18 +136,18 @@ select {
   width: 100%;
 }
 
-.settings {
-  & .settings-content {
+.skypack {
+  & .skypack-content {
     display: grid;
-    place-content: center;
+    justify-content: center;
     height: 100%;
   }
 
-  & .settings-type {
+  & .skypack-type {
     opacity: .6;
   }
 
-  & .settings-item {
+  & .skypack-item {
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -153,28 +156,91 @@ select {
     padding: 1em;
   }
 
+  & .skypack-item strong {
+    display: block;
+  }
+
+  & .input {
+    display: flex;
+    background-color: var(--bgc-input);
+    border: 1px solid var(--bdc-input);
+    color: var(--c-input);
+    padding: .5em;
+    margin-top: 3px;
+  }
+
+  & .input .input-icon {
+    fill: rgba(128, 128, 128, 0.50);
+  }
+
+  & .input input {
+    width: 100%;
+    padding: .05em;
+    padding-left: 8px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: var(--c-input);
+  }
+
+  & .search-results.hidden {
+    display: none;
+  }
+
+  & .search-results ul {
+    list-style: none;
+    margin: 0.5em 0;
+    padding: 0;
+  }
+
+  & .search-results ul li {
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  & .search-results ul li:hover {
+    background-color: rgba(128, 128, 128, 0.14);
+  }
+}
+
+.settings {
+  & .settings-content {
+    display: grid;
+    place-content: center;
+    height: 100%;
+  }
+  & .settings-type {
+    opacity: .6;
+  }
+  & .settings-item {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    padding: 1em;
+  }
   & .settings-item:hover {
     background: rgba(128, 128, 128, 0.14);
   }
-
   & .checkbox {
     display: flex;
     align-items: center;
   }
-
   & .checkbox input {
     display: none;
   }
-
   & .checkbox span {
     display: flex;
     align-items: center;
   }
-
   & .checkbox input:checked + span::before {
     content: '✓';
   }
-
   & .checkbox span::before {
     background: #444d56;
     border: 1px solid #1b1f23;
@@ -188,7 +254,6 @@ select {
     height: 18px;
     margin-right: 9px;
   }
-
   & .input {
     background-color: var(--bgc-input);
     color: var(--c-input);
