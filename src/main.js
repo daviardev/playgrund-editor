@@ -1,10 +1,12 @@
 import './grid.js'
 import '../style.css'
 import './settings.js'
+import './skypack.js'
 import './utils/aside.js'
 
 import { $ } from './utils/dom.js'
 import { subscribe } from './state.js'
+import { capitalize } from './utils/string.js'
 import { createEditor } from './editor.js'
 import { encode, decode } from 'js-base64'
 import { initEditorHoykeys } from './utils/editor-hotkeys.js'
@@ -26,6 +28,12 @@ const js = decodeJs ? decode(decodeJs) : ''
 const htmlEditor = createEditor({ domElement: $html, language: 'html', value: html })
 const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
 const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
+
+window.onmessage = ({ data }) => {
+  if (Object.prototype.toString.call(data) === '[object Object]' && Object.keys(data).includes('package')) {
+    jsEditor.setValue(`import ${capitalize(data.package)} from '${data.url}';\n${jsEditor.getValue()}`)
+  }
+}
 
 subscribe(state => {
   const editors = [htmlEditor, jsEditor, cssEditor]
