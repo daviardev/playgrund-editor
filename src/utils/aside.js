@@ -1,30 +1,59 @@
+import { __, events } from '../events-controller.js'
 import { $, $$ } from './dom.js'
 
 const $aside = $('aside')
 const $buttons = $$('button', $aside)
 
-const actions = {
+const SIMPLE_CLICK_ACTIONS = {
+  'download-source-code': () => {
+    __.emit(events.DOWNLOAD_SOURCE_CODE)
+  }
+}
+
+const NON_SIMPLE_CLICK_ACTIONS = {
   'close-aside-bar': () => {
     $('.aside-bar').setAttribute('hidden', '')
   },
+
   'show-skypack-bar': () => {
-    $('.aside-bar').removeAttribute('hidden')
-    $$('.bar-content').forEach(el => el.setAttribute('hidden', ''))
-    $('#skypack').removeAttribute('hidden')
+    showAsideBar('#skypack')
+    $('#skypack-search-input').focus()
   },
+
   'show-settings-bar': () => {
-    $('.aside-bar').removeAttribute('hidden')
-    $$('.bar-content').forEach(el => el.setAttribute('hidden', ''))
-    $('#settings').removeAttribute('hidden')
+    showAsideBar('#settings')
   }
+}
+
+const showAsideBar = (selector) => {
+  $('.aside-bar').removeAttribute('hidden')
+  $$('.bar-content').forEach(el => el.setAttribute('hidden', ''))
+  $(selector).removeAttribute('hidden')
+}
+
+const actions = {
+  ...SIMPLE_CLICK_ACTIONS,
+  ...NON_SIMPLE_CLICK_ACTIONS
 }
 
 $buttons.forEach(button => {
   button.addEventListener('click', ({ currentTarget }) => {
-    $('.is-active').classList.remove('is-active')
-    currentTarget.classList.add('is-active')
+    let action = button.getAttribute('data-action')
+    const isSimpleClickAction = button.getAttribute('data-is-simple-click-action') === 'true'
 
-    const action = button.getAttribute('data-action')
+    if (isSimpleClickAction) return actions[action]()
+
+    const alreadyActive = currentTarget.classList.contains('is-active')
+    $('.is-active').classList.remove('is-active')
+
+    action = alreadyActive
+      ? 'close-aside-bar'
+      : action
+
+    const elementToActive = alreadyActive
+      ? $("button[data-action='close-aside-bar']")
+      : currentTarget
+    elementToActive.classList.add('is-active')
     actions[action]()
   })
 })
