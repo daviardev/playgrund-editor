@@ -1,5 +1,7 @@
 import debounce from './utils/debounce.js'
+
 import { $ } from './utils/dom.js'
+import { __, events } from './events-controller.js'
 
 const apiUrl = 'https://api.skypack.dev/v1'
 const cdnUrl = 'https://cdn.skypack.dev'
@@ -61,5 +63,8 @@ async function fetchPackages (packageName) {
 }
 
 function handlePackageSelected (packageName) {
-  window.postMessage({ package: packageName, url: `${cdnUrl}/${packageName}` })
+  let parsedName = packageName.split('/').join('-')
+
+  if (parsedName.startsWith('@')) parsedName = parsedName.substr(1)
+  __.emit(events.ADD_SKYPACK_PACKAGE, { skypackPackage: parsedName, url: `${cdnUrl}/${packageName}` })
 }
