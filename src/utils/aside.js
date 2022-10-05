@@ -4,13 +4,13 @@ import { $, $$ } from './dom.js'
 const $aside = $('aside')
 const $buttons = $$('button', $aside)
 
+
 const SIMPLE_CLICK_ACTIONS = {
   'download-source-code': () => {
     __.emit(events.DOWNLOAD_SOURCE_CODE)
   },
   'copy-url': async () => {
     await navigator.clipboard.writeText(window.location.href)
-    window.alert('Se ha copiado la URL')
   }
 }
 
