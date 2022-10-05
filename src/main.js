@@ -8,7 +8,6 @@ import { $ } from './utils/dom.js'
 import { subscribe } from './state.js'
 import { createEditor } from './editor.js'
 import { encode, decode } from 'js-base64'
-import { initEditorHoykeys } from './utils/editor-hotkeys.js'
 import { initializeEventsController } from './events-controller.js'
 
 import debounce from './utils/debounce.js'
@@ -55,7 +54,6 @@ htmlEditor.onDidChangeModelContent(debounceUpdate)
 cssEditor.onDidChangeModelContent(debounceUpdate)
 jsEditor.onDidChangeModelContent(debounceUpdate)
 
-initEditorHoykeys({ htmlEditor, cssEditor, jsEditor })
 initializeEventsController({ htmlEditor, cssEditor, jsEditor })
 
 const htmlForPreview = createHtml({ html, css, js })
