@@ -6,7 +6,7 @@
 @import url('./src/css/skypack.css');
 
 :root {
-  --bgc-input: #2f363d;
+  --bgc-input: rgb(27, 27, 27);
   --bdc-input: rgb(27, 31, 35);
   --c-input: rgb(225, 228, 232);
 }
@@ -34,15 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   grid-template-columns: auto 1fr;
-}
-
-a {
-  color: #41a0ff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 [hidden] {
