@@ -1,0 +1,54 @@
+.settings {
+    & .settings-content {
+      display: grid;
+      place-content: center;
+      height: 100%;
+    }
+    & .settings-type {
+      opacity: .6;
+    }
+    & .settings-item {
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      padding: 1em;
+    }
+    & .settings-item:hover {
+      background: rgba(128, 128, 128, 0.14);
+    }
+    & .checkbox {
+      display: flex;
+      align-items: center;
+    }
+    & .checkbox input {
+      display: none;
+    }
+    & .checkbox span {
+      display: flex;
+      align-items: center;
+    }
+    & .checkbox input:checked + span::before {
+      content: '✓';
+    }
+    & .checkbox span::before {
+      background: #444d56;
+      border: 1px solid #1b1f23;
+      border-radius: 3px;
+      color: #e1e4e8;
+      content: '';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      margin-right: 9px;
+    }
+    & .input {
+      background-color: var(--bgc-input);
+      color: var(--c-input);
+      border: 1px solid var(--bdc-input);
+      padding: .3em;
+    }
+  }
