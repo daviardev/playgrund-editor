@@ -11,6 +11,7 @@ import { encode, decode } from 'js-base64'
 import { initializeEventsController } from './events-controller.js'
 
 import debounce from './utils/debounce.js'
+import WindowPreviewer from './utils/WindowPreviewer.js'
 
 const $js = $('#js')
 const $css = $('#css')
@@ -69,6 +70,7 @@ function update () {
 
   const htmlForPreview = createHtml({ html, css, js })
   $('iframe').setAttribute('srcdoc', htmlForPreview)
+  WindowPreviewer.updateWindowContent(htmlForPreview)
 }
 
 // internal expand API,
