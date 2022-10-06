@@ -1,5 +1,7 @@
-import { __, events } from '../events-controller.js'
 import { $, $$ } from './dom.js'
+import { __, events } from '../events-controller.js'
+
+import WindowPreviewer from './WindowPreviewer.js'
 
 const $aside = $('aside')
 const $buttons = $$('button', $aside)
@@ -26,6 +28,10 @@ const NON_SIMPLE_CLICK_ACTIONS = {
 
   'show-settings-bar': () => {
     showAsideBar('#settings')
+  },
+
+  'open-iframe-tab': () => {
+    WindowPreviewer.openWindow()
   }
 }
 
